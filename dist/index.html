@@ -11,6 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <title>Event Planner v1.0</title>
     </head>
     <body>
         <div class="container">
@@ -37,14 +38,14 @@
                     <a id='returnToEvents' onclick="returnToEvents()"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a><h1>Adding A New Event</h1>
                 </div>
                 <form id="event-form" onsubmit="return false">
-                    <div class="row"><div class='inputprefix'>Event Name</div><input id="event" type="text" placeholder="New Event" required autofocus autocomplete="on"></div>
+                    <div class="row"><div class='inputprefix'>Event</div><input id="event" type="text" placeholder="New Event" required autofocus autocomplete="on"></div>
                     <div class="row"><div class='inputprefix'>Host</div><input id="host" type="text" placeholder="Who Hosts?" required autocomplete="on"></div>
                     <div class="row" id="start">
-                        <div class='inputprefix'>Start Time</div><input id="start-time" data-format="dd/MM/yyyy hh:mm:ss" type="text" placeholder="Start Time" autocomplete="on" required>
+                        <div class='inputprefix'>Start</div><input id="start-time" data-format="dd/MM/yyyy hh:mm:ss" type="text" placeholder="Start Time" autocomplete="on" required>
                         <div class="rightbutton"><span class="add-on glyphicon glyphicon-calendar"></span></div>
                     </div>
                     <div class="row" id="end">
-                        <div class='inputprefix'>End Time</div><input id="end-time" data-format="dd/MM/yyyy hh:mm:ss" type="text" placeholder="End Time" autocomplete="on" required>
+                        <div class='inputprefix'>End</div><input id="end-time" data-format="dd/MM/yyyy hh:mm:ss" type="text" placeholder="End Time" autocomplete="on" required>
                         <div class="rightbutton"><span class="add-on glyphicon glyphicon-calendar"></span></div>
                     </div>
                     <div class="row guestdiv">

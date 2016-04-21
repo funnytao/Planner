@@ -50,7 +50,7 @@
         padding: 10px 0 10px 0;
     }
     .map {
-        width: 300px;
+        width: 280px;
         height: 150px;
     }
     .showEvents #addeventbutton {
@@ -58,17 +58,56 @@
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 440px) {
     .showEvents {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .showEvents h1 {
+        margin-top: 0;
+        font-size: 20px;
+    }
+    .showEvents #addeventbutton {
+        font-size: 120%;
+        margin-bottom: 10px;
+    }
+    .showEvents .panel-default .panel-body h2 {
+        font-size: 20px;
+    }
+    showEvents .panel-default .panel-footer .tag {
+        padding: 2px;
+        height: 30px;
+    }
+    .map {
+        width: 250px;
+        height: 150px;
+    }
+    .welcome {
         width: 98%;
         margin-left: 1%;
     }
-
-    .showEvents h1 {
-        margin-top: 0;
+    .planner a {
+        font-size: 120%;
+        margin-bottom: 10px;
     }
-    .map {
-        width: 300px;
-        height: 150px;
+    .planner h1 {
+        font-size: 20px;
+    }
+    .planner #event, .planner #host, .planner #pac-input {
+        width: 220px;
+    }
+    .planner #start-time, .planner #end-time, .planner .guestlist {
+        width: 190px;
+    }
+    .planner .inputprefix {
+        width: 40px;
+        font-size: 12px;
+    }
+    .planner form {
+        padding: 0;
+    }
+    .planner button {
+        margin-left: 0;
     }
 }

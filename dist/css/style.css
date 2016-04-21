@@ -204,6 +204,7 @@ body {
   text-align: center; }
   .welcome form {
     padding: 10px;
+    padding-bottom: 0;
     display: inline-block; }
     .welcome form input {
       height: 30px;
