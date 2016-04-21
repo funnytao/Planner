@@ -1,0 +1,49 @@
+.welcome {
+    width: 44%;
+    margin-left: 28%;
+    height: 50%;
+    margin-top: 30%;
+    background-color: rgb(235, 235, 235);
+    border-radius: 10px;
+    text-align: center;
+    form {
+        padding: 10px;
+        display: inline-block;
+        input {
+            height: 30px;
+            width: 220px;
+        }
+        div {
+            margin-bottom: 5px;
+        }
+        button {
+            font-size: 120%;
+            background-color: #ff3e3e;
+            color: aliceblue;
+            border-radius: 10px;
+            text-decoration: none;
+            height: 35px;
+            width: 220px;
+            outline: none;
+            text-shadow:none !important;
+            border:none !important;
+            box-shadow:none !important;
+        }
+        .redirect {
+            margin-top: 10px;
+        }
+        a {
+            text-decoration: underline;
+            font-size: 90%;
+        }
+    }
+    #login-form {
+        display: block;
+    }
+    #register-form {
+        display: none;
+    }
+    a {
+        text-decoration: none;
+    }
+}

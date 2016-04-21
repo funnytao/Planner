@@ -1,0 +1,83 @@
+
+.showEvents {
+    width: 70%;
+    margin-left: 15%;
+    display: none;
+    .panel-default {
+        position: relative;
+        width: 100%;
+        background-color: rgb(255, 103, 102);
+        color: aliceblue;
+        .panel-body {
+            text-align: center;
+            vertical-align: middle;
+            h2 {
+                height: 35px;
+                margin-top: 2px;
+                float: left;
+            }
+            a {
+                height: 35px;
+                float: right;
+                color: aliceblue;
+                font-size: 150%;
+                margin-top: 12px;
+            }
+            div {
+                clear: both;
+            }
+        }
+        .panel-footer {
+            color: black;
+            .tag {
+                text-align: center;
+                border-radius: 4px;
+                background-color: rgb(255, 103, 102);
+                color: aliceblue;
+                float: left;
+                padding: 5px;
+                vertical-align: middle;
+                width: 60px;
+                height: 40px;
+                margin-right: 10px;
+                margin-left: 10px;
+            }
+            .data {
+                padding: 5px;
+                float: left;
+                font-weight: 600;
+            }
+            .map {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    ul {
+        list-style-type: none;
+    }
+    li {
+        display: inline-block;
+    }
+
+    #addeventbutton {
+        margin-right: 10px;
+        margin-bottom: 20px;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 200%;
+        color: rgb(255, 103, 102);
+    }
+    #addeventbutton:hover {
+        color: rgb(182, 64, 64);
+    }
+    h1 {
+        color: aliceblue;
+        display: inline-block;
+    }
+    .addingtitle {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,74 @@
+@media only screen and (max-width: 1000px) {
+    .showEvents #addeventbutton {
+        font-size: 150%;
+    }
+    .planner a {
+        font-size: 150%;
+    }
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .showEvents {
+        width: 90%;
+        margin-left: 5%;
+    }
+    .planner {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .map {
+        width: 350px;
+        height: 200px;
+    }
+    .showEvents .panel-default .panel-footer .todiv {
+        clear: both;
+    }
+    .welcome {
+        width: 80%;
+        margin-left: 10%;
+    }
+    .planner form {
+    padding-left: 5px; }
+}
+
+@media only screen and (max-width: 500px) {
+    .planner {
+        width: 98%;
+        margin-left: 1%;
+    }
+    .planner input {
+        width: 200px;
+    }
+    .showEvents .panel-default .panel-footer {
+        padding: 10px 0 10px 0;
+    }
+    .map {
+        width: 300px;
+        height: 150px;
+    }
+    .showEvents #addeventbutton {
+        width: 30px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .showEvents {
+        width: 98%;
+        margin-left: 1%;
+    }
+
+    .showEvents h1 {
+        margin-top: 0;
+    }
+    .map {
+        width: 300px;
+        height: 150px;
+    }
+}

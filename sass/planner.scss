@@ -1,0 +1,105 @@
+.planner {
+    width: 70%;
+    margin-left: 15%;
+    display: none;
+    color: aliceblue;
+    .inputprefix {
+        font-weight: 500;
+        padding-top: 4px;
+        height: 30px;
+        width: 90px;
+        text-align: center;
+        vertical-align: middle;
+        float: left;
+        border-radius: 4px 0 0 4px;
+        background-color: rgb(77, 169, 168);
+    }
+    #start-time, #end-time, #event, #host, .guestlist {
+        width: 250px;
+        float: left;
+        border-radius: 0 4px 4px 0;
+    }
+    form {
+        padding-left: 35px;
+    }
+    div {
+        margin-bottom: 8px;
+    }
+    #guest {
+        margin-left: 0;
+    }
+    input {
+        height: 30px;
+        width: 220px;
+    }
+    #start-time, #end-time, .guestlist {
+        width: 220px;
+        border-radius: 0;
+        float: left;
+        border-right: 2px solid #b2b2b2;
+    }
+    #end {
+        margin-bottom: 3px;
+    }
+    .guestdiv {
+        padding: 0;
+    }
+    .rightbutton {
+        border-radius: 0 4px 4px 0;
+        height: 30px;
+        width: 30px;
+        padding: 2px;
+        float: left;
+        display: inline-block;
+        background-color: aliceblue;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 120%;
+        color: black;
+        span {
+            margin-top: 4px;
+        }
+    }
+    #add-guests {
+        font-size: 120%;
+        margin: 7px 10px 10px 10px;
+    }
+    a {
+        margin-right: 10px;
+        margin-bottom: 20px;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 200%;
+        color: rgb(77, 169, 168);
+    }
+    a:hover {
+        color: rgb(107, 203, 202);
+    }
+    .choosetime {
+        visibility: hidden;
+    }
+    h1, h4 {
+        color: aliceblue;
+        display: inline-block;
+    }
+    .addingtitle {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    button {
+        width: 50%;
+        margin-left: 10%;
+        font-size: 120%;
+        background-color: rgb(77, 169, 168);
+        color: aliceblue;
+        border-radius: 10px;
+        text-decoration: none;
+        height: 35px;
+        width: 220px;
+        outline: none;
+        text-shadow:none !important;
+        border:none !important;
+        box-shadow:none !important;
+    }
+}

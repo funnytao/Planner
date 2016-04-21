@@ -1,0 +1,235 @@
+.event-area {
+  margin-top: 20px; }
+
+#addeventbutton {
+  right: 0;
+  width: 100px;
+  left: auto; }
+
+body {
+  background-color: #26292c;
+  font-size: 15px; }
+
+.row {
+  margin: 0 auto; }
+
+.showEvents {
+  width: 70%;
+  margin-left: 15%;
+  display: none; }
+  .showEvents .panel-default {
+    position: relative;
+    width: 100%;
+    background-color: #ff6766;
+    color: aliceblue; }
+    .showEvents .panel-default .panel-body {
+      text-align: center;
+      vertical-align: middle; }
+      .showEvents .panel-default .panel-body h2 {
+        height: 35px;
+        margin-top: 2px;
+        float: left; }
+      .showEvents .panel-default .panel-body a {
+        height: 35px;
+        float: right;
+        color: aliceblue;
+        font-size: 150%;
+        margin-top: 12px; }
+      .showEvents .panel-default .panel-body div {
+        clear: both; }
+    .showEvents .panel-default .panel-footer {
+      color: black; }
+      .showEvents .panel-default .panel-footer .tag {
+        text-align: center;
+        border-radius: 4px;
+        background-color: #ff6766;
+        color: aliceblue;
+        float: left;
+        padding: 5px;
+        vertical-align: middle;
+        width: 60px;
+        height: 40px;
+        margin-right: 10px;
+        margin-left: 10px; }
+      .showEvents .panel-default .panel-footer .data {
+        padding: 5px;
+        float: left;
+        font-weight: 600; }
+      .showEvents .panel-default .panel-footer .map {
+        margin-left: 10px; }
+  .showEvents ul {
+    list-style-type: none; }
+  .showEvents li {
+    display: inline-block; }
+  .showEvents #addeventbutton {
+    margin-right: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 200%;
+    color: #ff6766; }
+  .showEvents #addeventbutton:hover {
+    color: #b64040; }
+  .showEvents h1 {
+    color: aliceblue;
+    display: inline-block; }
+  .showEvents .addingtitle {
+    margin-top: 20px;
+    margin-bottom: 20px; }
+
+.map {
+  border-radius: 10px;
+  height: 250px;
+  width: 400px;
+  color: black; }
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); }
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px; }
+
+#pac-input:focus {
+  border-color: #4d90fe; }
+
+.planner {
+  width: 70%;
+  margin-left: 15%;
+  display: none;
+  color: aliceblue; }
+  .planner .inputprefix {
+    font-weight: 500;
+    padding-top: 4px;
+    height: 30px;
+    width: 90px;
+    text-align: center;
+    vertical-align: middle;
+    float: left;
+    border-radius: 4px 0 0 4px;
+    background-color: #4da9a8; }
+  .planner #start-time, .planner #end-time, .planner #event, .planner #host, .planner .guestlist {
+    width: 250px;
+    float: left;
+    border-radius: 0 4px 4px 0; }
+  .planner form {
+    padding-left: 35px; }
+  .planner div {
+    margin-bottom: 8px; }
+  .planner #guest {
+    margin-left: 0; }
+  .planner input {
+    height: 30px;
+    width: 220px; }
+  .planner #start-time, .planner #end-time, .planner .guestlist {
+    width: 220px;
+    border-radius: 0;
+    float: left;
+    border-right: 2px solid #b2b2b2; }
+  .planner #end {
+    margin-bottom: 3px; }
+  .planner .guestdiv {
+    padding: 0; }
+  .planner .rightbutton {
+    border-radius: 0 4px 4px 0;
+    height: 30px;
+    width: 30px;
+    padding: 2px;
+    float: left;
+    display: inline-block;
+    background-color: aliceblue;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 120%;
+    color: black; }
+    .planner .rightbutton span {
+      margin-top: 4px; }
+  .planner #add-guests {
+    font-size: 120%;
+    margin: 7px 10px 10px 10px; }
+  .planner a {
+    margin-right: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 200%;
+    color: #4da9a8; }
+  .planner a:hover {
+    color: #6bcbca; }
+  .planner .choosetime {
+    visibility: hidden; }
+  .planner h1, .planner h4 {
+    color: aliceblue;
+    display: inline-block; }
+  .planner .addingtitle {
+    margin-top: 20px;
+    margin-bottom: 20px; }
+  .planner button {
+    width: 50%;
+    margin-left: 10%;
+    font-size: 120%;
+    background-color: #4da9a8;
+    color: aliceblue;
+    border-radius: 10px;
+    text-decoration: none;
+    height: 35px;
+    width: 220px;
+    outline: none;
+    text-shadow: none !important;
+    border: none !important;
+    box-shadow: none !important; }
+
+.welcome {
+  width: 44%;
+  margin-left: 28%;
+  height: 50%;
+  margin-top: 30%;
+  background-color: #ebebeb;
+  border-radius: 10px;
+  text-align: center; }
+  .welcome form {
+    padding: 10px;
+    display: inline-block; }
+    .welcome form input {
+      height: 30px;
+      width: 220px; }
+    .welcome form div {
+      margin-bottom: 5px; }
+    .welcome form button {
+      font-size: 120%;
+      background-color: #ff3e3e;
+      color: aliceblue;
+      border-radius: 10px;
+      text-decoration: none;
+      height: 35px;
+      width: 220px;
+      outline: none;
+      text-shadow: none !important;
+      border: none !important;
+      box-shadow: none !important; }
+    .welcome form .redirect {
+      margin-top: 10px; }
+    .welcome form a {
+      text-decoration: underline;
+      font-size: 90%; }
+  .welcome #login-form {
+    display: block; }
+  .welcome #register-form {
+    display: none; }
+  .welcome a {
+    text-decoration: none; }
