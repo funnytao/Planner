@@ -317,7 +317,7 @@ function displayMap(key, address) {
                 map: map,
                 position: results[0].geometry.location
             });
-            var infowindow = new google.maps.InfoWindow({ maxWidth: 150 });
+            var infowindow = new google.maps.InfoWindow({ maxWidth: 140 });
             infowindow.setContent('<div><strong>' + address.split(',')[0] + '</strong><br>' + address);
             infowindow.open(map, marker);
         } 

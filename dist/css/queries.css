@@ -81,11 +81,14 @@
     }
     .map {
         width: 250px;
-        height: 150px;
+        height: 160px;
     }
     .welcome {
         width: 98%;
         margin-left: 1%;
+    }
+    .planner div {
+        margin-bottom: 4px;
     }
     .planner a {
         font-size: 120%;
@@ -109,5 +112,18 @@
     }
     .planner button {
         margin-left: 0;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .map {
+        width: 220px;
+        height: 170px;
+    }
+    .planner #event, .planner #host, .planner #pac-input {
+        width: 190px;
+    }
+    .planner #start-time, .planner #end-time, .planner .guestlist {
+        width: 160px;
     }
 }
