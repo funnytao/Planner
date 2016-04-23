@@ -13,6 +13,11 @@ function createPanel(options, key) {
     closetab.setAttribute('class', 'deleteEvent');
     closetab.setAttribute('name', key);
     closetab.setAttribute('onclick', 'deleteEvent(this.name)');
+    if (options.important) {
+        var importantIcon = document.createElement('span');
+        importantIcon.setAttribute('class', 'glyphicon glyphicon-star');
+        closetab.appendChild(importantIcon);
+    }
     var closeIcon = document.createElement('span');
     closeIcon.setAttribute('class', 'glyphicon glyphicon-trash');
     closetab.appendChild(closeIcon);
@@ -67,8 +72,24 @@ function createPanel(options, key) {
     guestdata.appendChild(document.createTextNode(guestnames.substring(0, guestnames.length-3)));
     rowGuest.appendChild(guestdata);
     
+    if (options.note.length>0) {
+        var rowNote = document.createElement('div');
+        rowNote.setAttribute('class', 'row');
+        var notediv = document.createElement('p');
+        notediv.setAttribute('class', 'tag');
+        notediv.appendChild(document.createTextNode('Note'));
+        rowNote.appendChild(notediv);
+        var notedata = document.createElement('p');
+        notedata.setAttribute('class', 'data');
+        notedata.appendChild(document.createTextNode(options.note));
+        rowNote.appendChild(notedata);
+    }
+    
     panelFooter.appendChild(rowHost);
     panelFooter.appendChild(rowGuest);
+    if (options.note.length>0) { 
+        panelFooter.appendChild(rowNote); 
+    }
     panelFooter.appendChild(rowTime);
     var newmap = document.createElement('div');
     newmap.setAttribute('id', key);

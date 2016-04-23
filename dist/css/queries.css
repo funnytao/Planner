@@ -97,7 +97,7 @@
     .planner h1 {
         font-size: 20px;
     }
-    .planner #event, .planner #host, .planner #pac-input {
+    .planner #event, .planner #host, .planner #pac-input, .planner #eventtype, .planner #mtg {
         width: 220px;
     }
     .planner #start-time, .planner #end-time, .planner .guestlist {
@@ -120,10 +120,17 @@
         width: 220px;
         height: 170px;
     }
-    .planner #event, .planner #host, .planner #pac-input {
+    .planner #event, .planner #host, .planner #pac-input, .planner #eventtype, .planner #mtg {
         width: 190px;
     }
     .planner #start-time, .planner #end-time, .planner .guestlist {
         width: 160px;
+    }
+    .planner .guestdiv h4 {
+        font-size: 15px
+    }
+    .planner #switchprefix {
+        margin-left: 0;
+        width: 70px;
     }
 }

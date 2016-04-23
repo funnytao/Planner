@@ -75,17 +75,22 @@ function initMap() {
 // Add a new slog for guest input
 
 function addguest() {
+    var d = new Date();
+    var n = d.getTime();
     console.log('created!');
     var addrow = document.createElement('div');
     addrow.setAttribute('class', 'row');
-    var title = document.createElement('div');
+    var title = document.createElement('label');
     title.setAttribute('class', 'inputprefix');
+    title.setAttribute('for', n);
     title.appendChild(document.createTextNode('Guest'));
     var dest = document.getElementById('guest');
     var guestname = document.createElement('input');
     guestname.required = true;
+    guestname.setAttribute('title', "");
     guestname.setAttribute('class', 'guestlist');
     guestname.setAttribute('type', 'text');
+    guestname.setAttribute('id', n);
     guestname.setAttribute('placeholder', 'Who is invited?');
     var deletebutton = document.createElement('div');
     deletebutton.setAttribute('class', 'rightbutton');
@@ -97,6 +102,9 @@ function addguest() {
     addrow.appendChild(guestname);
     addrow.appendChild(deletebutton);
     dest.appendChild(addrow);
+    $('#'+n).on('input', function(){
+        checkEmpty(n, false);
+    });
 }
 
 function deleteguest(item) {
@@ -121,8 +129,111 @@ $('#end').datetimepicker({
 
 // Add a new event
 
+function checkEmpty(id, haserror) {
+    var checkvalue = document.getElementById(id).value;
+    var errortext = "";
+    if (checkvalue==="") {
+        console.log('isempty');
+        errortext = "Value cannot be empty.";
+        $('#'+id).attr('title', errortext)
+                        .tooltip('fixTitle')
+                        .tooltip('setContent')
+                        .tooltip({trigger: "focus"})
+                        .tooltip('show');
+        $('#'+id).css('background-color', 'rgb(247, 215, 216)');
+        haserror = true;
+        console.log("error:"+haserror);
+    }
+    else {
+        console.log('notempty');
+        $('#'+id).tooltip('hide');
+        $('#'+id).removeAttr("title");
+        $('#'+id).css('background-color', 'white');
+    }
+    return haserror;
+}
+
+function checkEventEmpty() {
+    var checkvalue = document.getElementById('event').value;
+    var errortext = "";
+    if (checkvalue==="") {
+        console.log('isempty');
+        errortext = "Value cannot be empty.";
+        $('#event').attr('title', errortext)
+                        .tooltip('fixTitle')
+                        .tooltip('setContent')
+                        .tooltip({trigger: "focus"})
+                        .tooltip('show');
+        $('#event').css('background-color', 'rgb(247, 215, 216)');
+    }
+    else {
+        console.log('notempty');
+        $('#event').tooltip('hide');
+        $('#event').removeAttr("title");
+        $('#event').css('background-color', 'white');
+    }
+}
+
+function checkdate(haserror) {
+    var starttime = document.getElementById('start-time').value;
+    var endtime = document.getElementById('end-time').value;
+    var errortext = "";
+    if (starttime!=="" && endtime!=="") {
+        if (starttime>endtime) {
+            errortext = "Start time should be earlier than end time.";
+            console.log('reversed...');
+            $('#start-time').attr('title', errortext)
+                        .tooltip('fixTitle')
+                        .tooltip('setContent')
+                        .tooltip({trigger: "focus"})
+                        .tooltip('show');
+            $('#start-time').css('background-color', 'rgb(247, 215, 216)');
+            haserror = true;
+            console.log("error:"+haserror);
+        }
+        else {
+            console.log('safe');
+            $('#start-time').attr('title', "");
+            $('#start-time').tooltip('hide');
+            $('#start-time').removeAttr("title");
+            $('#start-time').css('background-color', 'white');
+        }
+    }
+    return haserror;
+}
+
+$('#event').on('input', function(){
+    checkEmpty('event', false);
+});
+
+$('#eventtype').on('input', function(){
+    checkEmpty('eventtype', false);
+});
+$('#start-time').on('input', function(){
+    checkEmpty('start-time', false);
+    checkdate(isempty);
+});
+$('#end-time').on('input', function(){
+    checkEmpty('end-time', false);
+    checkdate(false);
+});
+$('#host').on('input', function(){
+    checkEmpty('host', false);
+});
+$('#pac-input').on('input', function(){
+    checkEmpty('pac-input', false);
+});
+
 document.querySelector('#addevent').onclick = function() {
-    console.log('adding events');
+    var haserror = false;
+//    console.log(document.getElementById('start-time').value<document.getElementById('end-time').value);
+    haserror = checkEmpty('event', haserror);
+    haserror = checkEmpty('eventtype', haserror);
+    haserror = checkEmpty('host', haserror);
+    haserror = checkEmpty('start-time', haserror);
+    haserror = checkEmpty('end-time', haserror);
+    haserror = checkdate(haserror);
+    haserror = checkEmpty('pac-input', haserror);
     var guestList = [];
     var guests = document.getElementById('guest');
     console.log(guestList.length);
@@ -130,18 +241,19 @@ document.querySelector('#addevent').onclick = function() {
     // To read input value inside div
     
     for (i=0; i<guests.childNodes.length; i++) {
-//        console.log(guests.childNodes[i].firstChild.nextSibling);
         var name = guests.childNodes[i].firstChild.nextSibling.value;
-        if (name!==undefined) {
+        if (name!=="") {
             guestList.push(name);
+        }
+        else {
+            haserror = checkEmpty(guests.childNodes[i].firstChild.nextSibling.id, haserror);
         }
     }
     
     var ref = new Firebase("https://boiling-heat-4273.firebaseio.com");
     var authData = ref.getAuth();
-    
-    console.log(guestList.length);
-    if (authData && guestList.length>0) {
+    console.log(haserror);
+    if (authData && guestList.length>0 && !haserror) {
         var dataref = new Firebase("https://boiling-heat-4273.firebaseio.com/web/planner/users/"+authData.uid+"/events");
         dataref.push().set({
             eventname: document.getElementById('event').value,
@@ -149,7 +261,9 @@ document.querySelector('#addevent').onclick = function() {
             start: document.getElementById('start-time').value,
             end: document.getElementById('end-time').value,
             guests: guestList,
-            address: document.getElementById('pac-input').value
+            address: document.getElementById('pac-input').value,
+            important: document.getElementById('switch').checked,
+            note: document.getElementById('mtg').value
         });
         returnToEvents();
     }
@@ -163,7 +277,11 @@ function addnew() {
     clearGuests();
     addguest();
     renderMap();
-    //initMap();
+    document.getElementById('event').focus();
+    $('.planner input').tooltip({ selector: "[title]",
+                      placement: "bottom",
+                      trigger: "focus",
+                      animation: false}); 
 }
 
 // Close all the input added in previous section
@@ -180,7 +298,8 @@ function clearGuests() {
 
 // Redirect to events shown
 
-function returnToEvents() {
+function returnToEvents() { 
+    $('.planner input').tooltip('destroy');
     document.querySelector('.planner').style.display = "none";
     document.querySelector('.showEvents').style.display = "block";
     showEvents();

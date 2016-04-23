@@ -14,7 +14,7 @@
         border-radius: 4px 0 0 4px;
         background-color: rgb(77, 169, 168);
     }
-    #start-time, #end-time, #event, #host, .guestlist {
+    #start-time, #end-time, #event, #host, .guestlist, #eventtype, #mtg {
         width: 250px;
         float: left;
         border-radius: 0 4px 4px 0;
@@ -41,8 +41,35 @@
     #end {
         margin-bottom: 3px;
     }
+    #switchprefix {
+        float: left;
+        margin-top: 5px;
+        margin-left: 5%;
+        margin-right: 0;
+        font-weight: 500;
+        padding-top: 4px;
+        height: 30px;
+        width: 90px;
+        text-align: center;
+        vertical-align: middle;
+        display: inline-block;
+        border-radius: 4px 0 0 4px;
+        background-color: rgb(77, 169, 168);
+    }
+    #switch {
+        height: 33px;
+        float: left;
+        display: inline-block;
+        margin-left: 0;
+        width: 30px;
+        vertical-align: middle;
+        margin-top: 5px;
+    }
     .guestdiv {
         padding: 0;
+    }
+    .guestdiv h4 {
+        float: left;
     }
     .rightbutton {
         border-radius: 0 4px 4px 0;
@@ -61,6 +88,7 @@
         }
     }
     #add-guests {
+        float: left;
         font-size: 120%;
         margin: 7px 10px 10px 10px;
     }

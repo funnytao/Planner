@@ -1,3 +1,4 @@
+var authusername = "";
 var loggedin = false;
 var userid;
 var ref = new Firebase("https://boiling-heat-4273.firebaseio.com");
@@ -58,40 +59,75 @@ var usernameError = "";
 var emailError = "";
 var firstInputIssuesTracker = new IssueTracker();
 var secondInputIssuesTracker = new IssueTracker();
-var dupuser = false;
 
-$("#regusername").on('input', function(){
-    dupuser = false;
+$("#regusername").on('input', usernameValid);
+
+function usernameValid() {
     var regusername = regUsernameInput.value;
-    //var usernameError = "";
-    usernameError = regusername.match(/[^A-z0-9]/g)? "Cannot contains elements other than letters and numbers." : "";
+    usernameError = regusername===""? "Username cannot be empty!" : "";
+    usernameError = regusername.match(/[^A-z0-9]/g)? "Cannot contains elements other than letters and numbers." : usernameError;
     var userdata = new Firebase(url);
     userdata.once("value", function(snapshot) {
         snapshot.forEach(function(smallshot) {
-            if (smallshot.child("username").val()===regusername) {
-                dupuser = true;
+            console.log("here: "+smallshot.child("username").val()+"  "+regusername);
+            if (smallshot.child("username").val()!=="" && smallshot.child("username").val()===regusername) {
                 usernameError = "Username Already Exists.";
             }
         });
+    }).then(function() {
+        if (usernameError.length>0) {
+            $('#regusername').attr('title', usernameError)
+                            .tooltip('fixTitle')
+                            .tooltip('setContent')
+                            .tooltip({trigger: "focus"})
+                            .tooltip('show');
+            $('#regusername').css('background-color', 'rgb(247, 215, 216)');
+        }
+        else {
+            $('#regusername').tooltip('hide');
+            $('#regusername').removeAttr("title");
+            $('#regusername').css('background-color', 'white');
+        }
+        console.log(usernameError);
     });
-    if (usernameError.length>0) {
-        $('#regusername').attr('title', usernameError)
-                        .tooltip('fixTitle')
-                        .tooltip('setContent')
-                        .tooltip({trigger: "focus"})
-                        .tooltip('show');
-        $('#regusername').css('background-color', 'rgb(247, 215, 216)');
-    }
-    else {
-        $('#regusername').tooltip('hide');
-        $('#regusername').removeAttr("title");
-        $('#regusername').css('background-color', 'white');
-    }
-    console.log(usernameError);
-    regUsernameInput.setCustomValidity("");
-});
+}
 
-$("#firstPassword").on('input', function(){
+$("#email").on('input', emailValid);
+
+function emailValid() {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var emailAddress = document.getElementById('email').value;
+    emailError = re.test(emailAddress)? "" : "Email address is not valid.";
+    emailError = emailAddress===""? "Email cannot be empty!" : "";
+    var userdata = new Firebase(url);
+    userdata.once("value", function(snapshot) {
+        snapshot.forEach(function(smallshot) {
+            console.log("here: "+smallshot.child("email").val()+"  "+emailAddress);
+            if (smallshot.child("email").val()!=="" && smallshot.child("email").val()===emailAddress) {
+                emailError = "Email Already Exists.";
+            }
+        });
+    }).then(function() {
+        if (emailError.length>0) {
+            $('#email').attr('title', emailError)
+                            .tooltip('fixTitle')
+                            .tooltip('setContent')
+                            .tooltip({trigger: "focus"})
+                            .tooltip('show');
+            $('#email').css('background-color', 'rgb(247, 215, 216)');
+        }
+        else {
+            $('#email').tooltip('hide');
+            $('#email').removeAttr("title");
+            $('#email').css('background-color', 'white');
+        }
+        console.log(emailError);
+    });
+}
+
+$("#firstPassword").on('input', firstPasswordValid);
+
+function firstPasswordValid() {
     var firstPassword = firstPasswordInput.value;
     firstInputIssuesTracker = new IssueTracker();
     (function checkRequirements() {
@@ -137,9 +173,11 @@ $("#firstPassword").on('input', function(){
         $('#firstPassword').removeAttr("title");
         $('#firstPassword').css('background-color', 'white');
     }
-});
+}
 
-$("#secondPassword").on('input', function(){
+$("#secondPassword").on('input', secondPasswordValid);
+
+function secondPasswordValid() {
     var secondPassword = secondPasswordInput.value;
     secondInputIssuesTracker = new IssueTracker();
     
@@ -163,36 +201,46 @@ $("#secondPassword").on('input', function(){
         $('#secondPassword').removeAttr("title");
         $('#secondPassword').css('background-color', 'white');
     }
-    //secondPasswordInput.setCustomValidity(secondInputIssues);
-});
+}
 
 submitReg.onclick = function() {
+    console.log('clicked sign up');
     submitReg.setCustomValidity("");
-    if (secondInputIssuesTracker.issues.length+firstInputIssuesTracker.issues.length===0 && usernameError==="" && !dupuser) {
+    usernameValid();
+    firstPasswordValid();
+    secondPasswordValid();
+    if (secondInputIssuesTracker.issues.length+firstInputIssuesTracker.issues.length===0 && usernameError==="" && emailError==="") {
+        console.log('OK for now');
         ref.createUser({
             email    : document.querySelector('#email').value,
             password : secondPasswordInput.value
         }, function(error, userData) {
             if (error) {
-                alert(error);
-//                submitReg.setCustomValidity(error);
-                //console.log("Error creating user:", error);
+                console.log(error);
             } 
             else {
                 console.log("Successfully created user account with uid:", userData.uid);
                 new Firebase(url).child(userData.uid).set({
                     username: regUsernameInput.value,
+                    email: document.getElementById('email').value,
+                    job: document.getElementById('job').value || "unfilled",
                     events: []
                 });
-                alert("Account Created!");
-                loggedin = true;
-                showComponents();
+                ref.authWithPassword({
+                    email    : document.getElementById('email').value,
+                    password : secondPasswordInput.value
+                }, function(error, authData) {
+                    if (error) {
+                        console.log(error);
+                    }
+                    else {
+                        console.log("Authenticated successfully with payload:", authData.uid);
+                        authusername = regUsernameInput.value;
+                        showComponents();
+                    }
+                });
             }
         });
-    }
-    else if (dupuser) {
-        console.log("dup");
-        regUsernameInput.setCustomValidity("Username has already been used.");
     }
     else {
         console.log("eeeeeeeerror");
@@ -200,39 +248,108 @@ submitReg.onclick = function() {
     }
 };
 
-// Login Validation
-submitLogin.onclick = function() {
-    console.log("clicked");
-    var logsuc = false;
-    ref.authWithPassword({
-        email    : document.querySelector('#username').value,
-        password : document.querySelector('#password').value
-    }, function(error, authData) {
-        if (error) {
-            alert(error);
-//            submitLogin.setCustomValidity(error);
+var loginuserError = "";
+var loginpassError = "";
 
-            //setTimeout(function(){submitLogin.setCustomValidity(error);}, 500);
+$('#username').on('input', loginuserValid);
+
+function loginuserValid() {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var loginusername = document.getElementById('username').value;
+    loginuserError = loginusername===""? "Email cannot be empty!" : "";
+    var userdata = new Firebase(url);
+    userdata.once("value", function(snapshot) {
+        var exist = false;
+        snapshot.forEach(function(smallshot) {
+            if (smallshot.child("email").val()!=="" && smallshot.child("email").val()===loginusername) {
+                exist = true;
+            }
+        });
+        if (!exist && loginusername!=="") {
+            loginuserError = "Account does not exists.";
+        }
+    }).then(function() {
+        if (loginuserError.length>0) {
+            $('#username').attr('title', loginuserError)
+                            .tooltip('fixTitle')
+                            .tooltip('setContent')
+                            .tooltip({trigger: "focus"})
+                            .tooltip('show');
+            $('#username').css('background-color', 'rgb(247, 215, 216)');
         }
         else {
-            console.log("Authenticated successfully with payload:", authData.uid);
-            //alert("Welcome "+document.querySelector('#username').value+"!");
-            userid = authData.uid;
-            loggedin = true;
-            showComponents();
+            $('#username').tooltip('hide');
+            $('#username').removeAttr("title");
+            $('#username').css('background-color', 'white');
         }
+        console.log(loginuserError);
     });
-    
+}
+
+$('#password').on('input', loginpassValid);
+
+function loginpassValid(errortext) {
+    var loginpassword = document.getElementById('password').value;
+    loginpassError = loginpassword==="" ? "Please enter your password." : errortext;
+    if (loginpassError.length>0) {
+        $('#password').attr('title', loginpassError)
+                        .tooltip('fixTitle')
+                        .tooltip('setContent')
+                        .tooltip({trigger: "focus"})
+                        .tooltip('show');
+        $('#password').css('background-color', 'rgb(247, 215, 216)');
+    }
+    else {
+        $('#password').tooltip('hide');
+        $('#password').removeAttr("title");
+        $('#password').css('background-color', 'white');
+    }
+}
+
+// Login Validation
+submitLogin.onclick = function() {
+    console.log('login validation');
+    loginuserValid("");
+    loginpassValid("");
+    if (loginuserError.length===0 && loginpassError.length===0) {
+        ref.authWithPassword({
+            email    : document.querySelector('#username').value,
+            password : document.querySelector('#password').value
+        }, function(error, authData) {
+            if (error) {
+                console.log(error);
+                loginpassValid("Password is not correct.");
+            }
+            else {
+                console.log("Authenticated successfully with payload:", authData.uid);
+                //alert("Welcome "+document.querySelector('#username').value+"!");
+                userid = authData.uid;
+                new Firebase(url+authData.uid+"/username").once('value', function(snapshot) {
+                    authusername = snapshot.val();
+                    console.log(authusername);
+                }).then(function(){
+                    showComponents();
+                });
+            }
+        });
+    }
 };
 
 function showComponents() {
+    console.log(authusername);
     document.querySelector('.welcome').style.display = "none";
     document.querySelector('.showEvents').style.display = "block";
-    //initMap();
+    document.getElementById('authusername').innerHTML = authusername;
+    $('.welcome input').tooltip('destroy');
     showEvents();
 }
 
-$(document).tooltip({ selector: "[title]",
-                      placement: "right",
+$('.welcome input').tooltip({ selector: "[title]",
+                      placement: "bottom",
                       trigger: "focus",
                       animation: false}); 
+
+//$(document).tooltip({ selector: "[title]",
+//                      placement: "bottom",
+//                      trigger: "focus",
+//                      animation: false}); 
