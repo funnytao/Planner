@@ -1,30 +1,30 @@
 // Modified from Google Map API Guide
 
 function renderMap() {
-//    var map = new google.maps.Map(document.getElementById('map'), {
+//    var map = new google.maps.Map(document.getElementById("map"), {
 //      center: {lat: -33.8688, lng: 151.2195},
 //      zoom: 13
 //    });
 //    var input = /** @type {!HTMLInputElement} */(
-//        document.getElementById('pac-input'));
-    google.maps.event.trigger(map, 'resize');
+//        document.getElementById("pac-input"));
+    google.maps.event.trigger(map, "resize");
 
     //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 }
-var map;
+//var map;
 function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    var map = new google.maps.Map(document.getElementById("map"), {
         center: {lat: -33.8688, lng: 151.2195},
         zoom: 13,
         disableDefaultUI: true
     });
     var input = /** @type {!HTMLInputElement} */(
-        document.getElementById('pac-input'));
+        document.getElementById("pac-input"));
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     var autocomplete = new google.maps.places.Autocomplete(input);
-    autocomplete.bindTo('bounds', map);
+    autocomplete.bindTo("bounds", map);
 
     var infowindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
@@ -32,7 +32,7 @@ function initMap() {
       anchorPoint: new google.maps.Point(0, -29)
     });
 
-    autocomplete.addListener('place_changed', function() {
+    autocomplete.addListener("place_changed", function() {
       infowindow.close();
       marker.setVisible(false);
       var place = autocomplete.getPlace();
@@ -58,16 +58,16 @@ function initMap() {
       marker.setPosition(place.geometry.location);
       marker.setVisible(true);
 
-      var address = '';
+      var address = "";
       if (place.address_components) {
         address = [
-          (place.address_components[0] && place.address_components[0].short_name || ''),
-          (place.address_components[1] && place.address_components[1].short_name || ''),
-          (place.address_components[2] && place.address_components[2].short_name || '')
-        ].join(' ');
+          (place.address_components[0] && place.address_components[0].short_name || ""),
+          (place.address_components[1] && place.address_components[1].short_name || ""),
+          (place.address_components[2] && place.address_components[2].short_name || "")
+        ].join(" ");
       }
 
-      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+      infowindow.setContent("<div><strong>" + place.name + "</strong><br>" + address);
       infowindow.open(map, marker);
     });
 }
@@ -77,54 +77,54 @@ function initMap() {
 function addguest() {
     var d = new Date();
     var n = d.getTime();
-    console.log('created!');
-    var addrow = document.createElement('div');
-    addrow.setAttribute('class', 'row');
-    var title = document.createElement('label');
-    title.setAttribute('class', 'inputprefix');
-    title.setAttribute('for', n);
-    title.appendChild(document.createTextNode('Guest'));
-    var dest = document.getElementById('guest');
-    var guestname = document.createElement('input');
+//    console.log("created!");
+    var addrow = document.createElement("div");
+    addrow.setAttribute("class", "row");
+    var title = document.createElement("label");
+    title.setAttribute("class", "inputprefix");
+    title.setAttribute("for", n);
+    title.appendChild(document.createTextNode("Guest"));
+    var dest = document.getElementById("guest");
+    var guestname = document.createElement("input");
     guestname.required = true;
-    guestname.setAttribute('title', "");
-    guestname.setAttribute('class', 'guestlist');
-    guestname.setAttribute('type', 'text');
-    guestname.setAttribute('id', n);
-    guestname.setAttribute('placeholder', 'Who is invited?');
-    var deletebutton = document.createElement('div');
-    deletebutton.setAttribute('class', 'rightbutton');
-    var icon = document.createElement('span');
-    icon.setAttribute('class', 'glyphicon glyphicon-minus');
-    icon.setAttribute('onclick', 'deleteguest(this)');
+    guestname.setAttribute("title", "");
+    guestname.setAttribute("class", "guestlist");
+    guestname.setAttribute("type", "text");
+    guestname.setAttribute("id", n);
+    guestname.setAttribute("placeholder", "Who is invited?");
+    var deletebutton = document.createElement("div");
+    deletebutton.setAttribute("class", "rightbutton");
+    var icon = document.createElement("span");
+    icon.setAttribute("class", "glyphicon glyphicon-minus");
+    icon.setAttribute("onclick", "deleteguest(this)");
     deletebutton.appendChild(icon);
     addrow.appendChild(title);
     addrow.appendChild(guestname);
     addrow.appendChild(deletebutton);
     dest.appendChild(addrow);
-    $('#'+n).on('input', function(){
+    $("#"+n).on("input", function(){
         checkEmpty(n, false);
     });
 }
 
 function deleteguest(item) {
-    var guest = document.getElementById('guest');
+    var guest = document.getElementById("guest");
     if (guest.childNodes.length>1) {
-        console.log(item.parentElement.parentElement);
+//        console.log(item.parentElement.parentElement);
         item.parentElement.parentElement.remove();
     }
 }
 
 // Get date and time from widget
 
-$('#start').datetimepicker({
-    format: 'MM/dd/yyyy hh:mm',
-    language: 'en'
+$("#start").datetimepicker({
+    format: "MM/dd/yyyy hh:mm",
+    language: "en"
 });
 
-$('#end').datetimepicker({
-    format: 'MM/dd/yyyy hh:mm',
-    language: 'en'
+$("#end").datetimepicker({
+    format: "MM/dd/yyyy hh:mm",
+    language: "en"
 });
 
 // Add a new event
@@ -133,110 +133,110 @@ function checkEmpty(id, haserror) {
     var checkvalue = document.getElementById(id).value;
     var errortext = "";
     if (checkvalue==="") {
-        console.log('isempty');
+//        console.log("isempty");
         errortext = "Value cannot be empty.";
-        $('#'+id).attr('title', errortext)
-                        .tooltip('fixTitle')
-                        .tooltip('setContent')
+        $("#"+id).attr("title", errortext)
+                        .tooltip("fixTitle")
+                        .tooltip("setContent")
                         .tooltip({trigger: "focus"})
-                        .tooltip('show');
-        $('#'+id).css('background-color', 'rgb(247, 215, 216)');
+                        .tooltip("show");
+        $("#"+id).css("background-color", "rgb(247, 215, 216)");
         haserror = true;
-        console.log("error:"+haserror);
+//        console.log("error:"+haserror);
     }
     else {
-        console.log('notempty');
-        $('#'+id).tooltip('hide');
-        $('#'+id).removeAttr("title");
-        $('#'+id).css('background-color', 'white');
+        console.log("notempty");
+        $("#"+id).tooltip("hide");
+        $("#"+id).removeAttr("title");
+        $("#"+id).css("background-color", "white");
     }
     return haserror;
 }
 
 function checkEventEmpty() {
-    var checkvalue = document.getElementById('event').value;
+    var checkvalue = document.getElementById("event").value;
     var errortext = "";
     if (checkvalue==="") {
-        console.log('isempty');
+//        console.log("isempty");
         errortext = "Value cannot be empty.";
-        $('#event').attr('title', errortext)
-                        .tooltip('fixTitle')
-                        .tooltip('setContent')
+        $("#event").attr("title", errortext)
+                        .tooltip("fixTitle")
+                        .tooltip("setContent")
                         .tooltip({trigger: "focus"})
-                        .tooltip('show');
-        $('#event').css('background-color', 'rgb(247, 215, 216)');
+                        .tooltip("show");
+        $("#event").css("background-color", "rgb(247, 215, 216)");
     }
     else {
-        console.log('notempty');
-        $('#event').tooltip('hide');
-        $('#event').removeAttr("title");
-        $('#event').css('background-color', 'white');
+        console.log("notempty");
+        $("#event").tooltip("hide");
+        $("#event").removeAttr("title");
+        $("#event").css("background-color", "white");
     }
 }
 
 function checkdate(haserror) {
-    var starttime = document.getElementById('start-time').value;
-    var endtime = document.getElementById('end-time').value;
+    var starttime = document.getElementById("start-time").value;
+    var endtime = document.getElementById("end-time").value;
     var errortext = "";
     if (starttime!=="" && endtime!=="") {
         if (starttime>endtime) {
             errortext = "Start time should be earlier than end time.";
-            console.log('reversed...');
-            $('#start-time').attr('title', errortext)
-                        .tooltip('fixTitle')
-                        .tooltip('setContent')
+//            console.log("reversed...");
+            $("#start-time").attr("title", errortext)
+                        .tooltip("fixTitle")
+                        .tooltip("setContent")
                         .tooltip({trigger: "focus"})
-                        .tooltip('show');
-            $('#start-time').css('background-color', 'rgb(247, 215, 216)');
+                        .tooltip("show");
+            $("#start-time").css("background-color", "rgb(247, 215, 216)");
             haserror = true;
-            console.log("error:"+haserror);
+//            console.log("error:"+haserror);
         }
         else {
-            console.log('safe');
-            $('#start-time').attr('title', "");
-            $('#start-time').tooltip('hide');
-            $('#start-time').removeAttr("title");
-            $('#start-time').css('background-color', 'white');
+//            console.log("safe");
+            $("#start-time").attr("title", "");
+            $("#start-time").tooltip("hide");
+            $("#start-time").removeAttr("title");
+            $("#start-time").css("background-color", "white");
         }
     }
     return haserror;
 }
 
-$('#event').on('input', function(){
-    checkEmpty('event', false);
+$("#event").on("input", function(){
+    checkEmpty("event", false);
 });
 
-$('#eventtype').on('input', function(){
-    checkEmpty('eventtype', false);
+$("#eventtype").on("input", function(){
+    checkEmpty("eventtype", false);
 });
-$('#start-time').on('input', function(){
-    checkEmpty('start-time', false);
+$("#start-time").on("input", function(){
+    checkEmpty("start-time", false);
     checkdate(isempty);
 });
-$('#end-time').on('input', function(){
-    checkEmpty('end-time', false);
+$("#end-time").on("input", function(){
+    checkEmpty("end-time", false);
     checkdate(false);
 });
-$('#host').on('input', function(){
-    checkEmpty('host', false);
+$("#host").on("input", function(){
+    checkEmpty("host", false);
 });
-$('#pac-input').on('input', function(){
-    checkEmpty('pac-input', false);
+$("#pac-input").on("input", function(){
+    checkEmpty("pac-input", false);
 });
 
-document.querySelector('#addevent').onclick = function() {
+document.querySelector("#addevent").onclick = function() {
     var haserror = false;
-//    console.log(document.getElementById('start-time').value<document.getElementById('end-time').value);
-    haserror = checkEmpty('event', haserror);
-    haserror = checkEmpty('eventtype', haserror);
-    haserror = checkEmpty('host', haserror);
-    haserror = checkEmpty('start-time', haserror);
-    haserror = checkEmpty('end-time', haserror);
+//    console.log(document.getElementById("start-time").value<document.getElementById("end-time").value);
+    haserror = checkEmpty("event", haserror);
+    haserror = checkEmpty("eventtype", haserror);
+    haserror = checkEmpty("host", haserror);
+    haserror = checkEmpty("start-time", haserror);
+    haserror = checkEmpty("end-time", haserror);
     haserror = checkdate(haserror);
-    haserror = checkEmpty('pac-input', haserror);
+    haserror = checkEmpty("pac-input", haserror);
     var guestList = [];
-    var guests = document.getElementById('guest');
-    console.log(guestList.length);
+    var guests = document.getElementById("guest");
+//    console.log(guestList.length);
     
     // To read input value inside div
     
@@ -256,14 +256,14 @@ document.querySelector('#addevent').onclick = function() {
     if (authData && guestList.length>0 && !haserror) {
         var dataref = new Firebase("https://boiling-heat-4273.firebaseio.com/web/planner/users/"+authData.uid+"/events");
         dataref.push().set({
-            eventname: document.getElementById('event').value,
-            host: document.getElementById('host').value,
-            start: document.getElementById('start-time').value,
-            end: document.getElementById('end-time').value,
+            eventname: document.getElementById("event").value,
+            host: document.getElementById("host").value,
+            start: document.getElementById("start-time").value,
+            end: document.getElementById("end-time").value,
             guests: guestList,
-            address: document.getElementById('pac-input').value,
-            important: document.getElementById('switch').checked,
-            note: document.getElementById('mtg').value
+            address: document.getElementById("pac-input").value,
+            important: document.getElementById("switch").checked,
+            note: document.getElementById("mtg").value
         });
         returnToEvents();
     }
@@ -272,13 +272,13 @@ document.querySelector('#addevent').onclick = function() {
 // Redirect to the add event section
 
 function addnew() {
-    document.querySelector('.showEvents').style.display = "none";
-    document.querySelector('.planner').style.display = "block";
+    document.querySelector(".showEvents").style.display = "none";
+    document.querySelector(".planner").style.display = "block";
     clearGuests();
     addguest();
     renderMap();
-    document.getElementById('event').focus();
-    $('.planner input').tooltip({ selector: "[title]",
+    document.getElementById("event").focus();
+    $(".planner input").tooltip({ selector: "[title]",
                       placement: "bottom",
                       trigger: "focus",
                       animation: false}); 
@@ -287,106 +287,107 @@ function addnew() {
 // Close all the input added in previous section
 
 function clearGuests() {
-    var guests = document.getElementById('guest');
+    var guests = document.getElementById("guest");
 //    for (i=0; i<guests.childNodes.length; i++) {
 //        guests.childNodes[i].remove();
 //    }
     guests.innerHTML = "";
-    console.log('cleared');
-    $('input').val('');
+    console.log("cleared");
+    $("input").val("");
 }
 
 // Redirect to events shown
 
 function returnToEvents() { 
-    $('.planner input').tooltip('destroy');
-    document.querySelector('.planner').style.display = "none";
-    document.querySelector('.showEvents').style.display = "block";
+    $(".planner input").tooltip("destroy");
+    document.querySelector(".planner").style.display = "none";
+    document.querySelector(".showEvents").style.display = "block";
     showEvents();
 }
 // Should have used ReactJS... Too messy...
 // Function to build an event infowindow
 
 function createPanel(options, key) {
-    var panel = document.createElement('div');
-    panel.setAttribute('class', 'panel panel-default');
-    var panelBody = document.createElement('div');
-    panelBody.setAttribute('class', 'panel-body');
-    var header = document.createElement('h2');
+    var panel = document.createElement("div");
+    panel.setAttribute("class", "panel panel-default");
+    var panelBody = document.createElement("div");
+    panelBody.setAttribute("class", "panel-body");
+    var header = document.createElement("h2");
     header.appendChild(document.createTextNode(options.eventname));
     panelBody.appendChild(header);
-    var closetab = document.createElement('a');
-    closetab.setAttribute('class', 'deleteEvent');
-    closetab.setAttribute('name', key);
-    closetab.setAttribute('onclick', 'deleteEvent(this.name)');
+    var closetab = document.createElement("a");
+    closetab.setAttribute("class", "deleteEvent");
+    closetab.setAttribute("name", key);
+    closetab.setAttribute("onclick", "deleteEvent(this.name)");
     if (options.important) {
-        var importantIcon = document.createElement('span');
-        importantIcon.setAttribute('class', 'glyphicon glyphicon-star');
+        var importantIcon = document.createElement("span");
+        importantIcon.setAttribute("class", "glyphicon glyphicon-star");
         closetab.appendChild(importantIcon);
     }
-    var closeIcon = document.createElement('span');
-    closeIcon.setAttribute('class', 'glyphicon glyphicon-trash');
+    var closeIcon = document.createElement("span");
+    closeIcon.setAttribute("class", "glyphicon glyphicon-trash");
     closetab.appendChild(closeIcon);
     panelBody.appendChild(closetab);
-    var cleardiv = document.createElement('div');
+    var cleardiv = document.createElement("div");
     panelBody.appendChild(cleardiv);
-    var panelFooter = document.createElement('div');
-    panelFooter.setAttribute('class', 'panel-footer');
+    var panelFooter = document.createElement("div");
+    panelFooter.setAttribute("class", "panel-footer");
     
-    var rowTime = document.createElement('div');
-    rowTime.setAttribute('class', 'row');
-    var startdiv = document.createElement('p');
-    startdiv.setAttribute('class', 'tag');
-    startdiv.appendChild(document.createTextNode('From'));
+    var rowTime = document.createElement("div");
+    rowTime.setAttribute("class", "row");
+    var startdiv = document.createElement("p");
+    startdiv.setAttribute("class", "tag");
+    startdiv.appendChild(document.createTextNode("From"));
     rowTime.appendChild(startdiv);
-    var startdata = document.createElement('p');
-    startdata.setAttribute('class', 'data');
+    var startdata = document.createElement("p");
+    startdata.setAttribute("class", "data");
     startdata.appendChild(document.createTextNode(options.start));
     rowTime.appendChild(startdata);
-    var enddiv = document.createElement('p');
-    enddiv.setAttribute('class', 'tag todiv');
-    enddiv.appendChild(document.createTextNode('To'));
+    var enddiv = document.createElement("p");
+    enddiv.setAttribute("class", "tag todiv");
+    enddiv.appendChild(document.createTextNode("To"));
     rowTime.appendChild(enddiv);
-    var enddata = document.createElement('p');
-    enddata.setAttribute('class', 'data');
+    var enddata = document.createElement("p");
+    enddata.setAttribute("class", "data");
     enddata.appendChild(document.createTextNode(options.end));
     rowTime.appendChild(enddata);
     
-    var rowHost = document.createElement('div');
-    rowHost.setAttribute('class', 'row');
-    var hostdiv = document.createElement('p');
-    hostdiv.setAttribute('class', 'tag');
-    hostdiv.appendChild(document.createTextNode('Host'));
+    var rowHost = document.createElement("div");
+    rowHost.setAttribute("class", "row");
+    var hostdiv = document.createElement("p");
+    hostdiv.setAttribute("class", "tag");
+    hostdiv.appendChild(document.createTextNode("Host"));
     rowHost.appendChild(hostdiv);
-    var hostdata = document.createElement('p');
-    hostdata.setAttribute('class', 'data');
+    var hostdata = document.createElement("p");
+    hostdata.setAttribute("class", "data");
     hostdata.appendChild(document.createTextNode(options.host));
     rowHost.appendChild(hostdata);
     
-    var rowGuest = document.createElement('div');
-    rowGuest.setAttribute('class', 'row');
-    var guesttitle = document.createElement('p');
-    guesttitle.setAttribute('class', 'tag');
-    guesttitle.appendChild(document.createTextNode('Guests'));
+    var rowGuest = document.createElement("div");
+    rowGuest.setAttribute("class", "row");
+    var guesttitle = document.createElement("p");
+    guesttitle.setAttribute("class", "tag");
+    guesttitle.appendChild(document.createTextNode("Guests"));
     rowGuest.appendChild(guesttitle);
     var guestnames = "";
     options.guests.forEach(function(item) {
         guestnames = guestnames + item + ", ";
     });
-    var guestdata = document.createElement('p');
-    guestdata.setAttribute('class', 'data');
+    var guestdata = document.createElement("p");
+    guestdata.setAttribute("class", "data");
     guestdata.appendChild(document.createTextNode(guestnames.substring(0, guestnames.length-3)));
     rowGuest.appendChild(guestdata);
     
+    var rowNote;
     if (options.note.length>0) {
-        var rowNote = document.createElement('div');
-        rowNote.setAttribute('class', 'row');
-        var notediv = document.createElement('p');
-        notediv.setAttribute('class', 'tag');
-        notediv.appendChild(document.createTextNode('Note'));
+        rowNote = document.createElement("div");
+        rowNote.setAttribute("class", "row");
+        var notediv = document.createElement("p");
+        notediv.setAttribute("class", "tag");
+        notediv.appendChild(document.createTextNode("Note"));
         rowNote.appendChild(notediv);
-        var notedata = document.createElement('p');
-        notedata.setAttribute('class', 'data');
+        var notedata = document.createElement("p");
+        notedata.setAttribute("class", "data");
         notedata.appendChild(document.createTextNode(options.note));
         rowNote.appendChild(notedata);
     }
@@ -397,20 +398,20 @@ function createPanel(options, key) {
         panelFooter.appendChild(rowNote); 
     }
     panelFooter.appendChild(rowTime);
-    var newmap = document.createElement('div');
-    newmap.setAttribute('id', key);
-    newmap.setAttribute('class', 'map');
+    var newmap = document.createElement("div");
+    newmap.setAttribute("id", key);
+    newmap.setAttribute("class", "map");
     panelFooter.appendChild(newmap);
     panel.appendChild(panelBody);
     panel.appendChild(panelFooter);
-    document.getElementById('events').appendChild(panel);
+    document.getElementById("events").appendChild(panel);
     displayMap(key, options.address);
 }
 
 // Delete event
 
 function deleteEvent(item) {
-    console.log(item);
+//    console.log(item);
     var ref = new Firebase("https://boiling-heat-4273.firebaseio.com");
     var authData = ref.getAuth();
     if (authData) {
@@ -422,14 +423,14 @@ function deleteEvent(item) {
 // Display all the event
 
 function showEvents() {
-    var events = document.getElementById('events');
+    var events = document.getElementById("events");
     events.innerHTML = "";
     var ref = new Firebase("https://boiling-heat-4273.firebaseio.com");
     var authData = ref.getAuth();
     if (authData) {
         var dataref = new Firebase("https://boiling-heat-4273.firebaseio.com/web/planner/users/"+authData.uid+"/events");
 //        dataref.once("value", function(snapshot) {
-        dataref.orderByChild('start').on("value", function(snapshot) {
+        dataref.orderByChild("start").on("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 createPanel(childSnapshot.val(), childSnapshot.key());
             });
@@ -450,7 +451,7 @@ function displayMap(key, address) {
     });
     var geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode({'address': address}, function(results, status) {
+    geocoder.geocode({"address": address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
@@ -458,11 +459,11 @@ function displayMap(key, address) {
                 position: results[0].geometry.location
             });
             var infowindow = new google.maps.InfoWindow({ maxWidth: 140 });
-            infowindow.setContent('<div><strong>' + address.split(',')[0] + '</strong><br>' + address);
+            infowindow.setContent("<div><strong>" + address.split(",")[0] + "</strong><br>" + address);
             infowindow.open(map, marker);
         } 
         else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            alert("Geocode was not successful for the following reason: " + status);
         }
     });
 }
@@ -474,29 +475,29 @@ var url = "https://boiling-heat-4273.firebaseio.com/web/planner/users/";
 
 // Toggle login/register options
 
-var loginWindow = document.querySelector('#tologin');
-var regWindow = document.querySelector('#toreg');
-var regUsernameInput = document.querySelector('#regusername');
+var loginWindow = document.querySelector("#tologin");
+var regWindow = document.querySelector("#toreg");
+var regUsernameInput = document.querySelector("#regusername");
 
 loginWindow.onclick = function() {
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
+    document.getElementById("register-form").style.display = "none";
+    document.getElementById("login-form").style.display = "block";
     document.getElementById("username").focus();
 };
 
 regWindow.onclick = function() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
+    document.getElementById("login-form").style.display = "none";
+    document.getElementById("register-form").style.display = "block";
     document.getElementById("regusername").focus();
 };
 
 // Account Information Vanlidation
 
-var submitLogin = document.querySelector('#login-button');
-var submitReg = document.querySelector('#register-button');
+var submitLogin = document.querySelector("#login-button");
+var submitReg = document.querySelector("#register-button");
 
-var firstPasswordInput = document.querySelector('#firstPassword');
-var secondPasswordInput = document.querySelector('#secondPassword');
+var firstPasswordInput = document.querySelector("#firstPassword");
+var secondPasswordInput = document.querySelector("#secondPassword");
 
 function IssueTracker() {
   this.issues = [];
@@ -528,7 +529,7 @@ var emailError = "";
 var firstInputIssuesTracker = new IssueTracker();
 var secondInputIssuesTracker = new IssueTracker();
 
-$("#regusername").on('input', usernameValid);
+$("#regusername").on("input", usernameValid);
 
 function usernameValid() {
     var regusername = regUsernameInput.value;
@@ -537,63 +538,64 @@ function usernameValid() {
     var userdata = new Firebase(url);
     userdata.once("value", function(snapshot) {
         snapshot.forEach(function(smallshot) {
-            console.log("here: "+smallshot.child("username").val()+"  "+regusername);
+//            console.log("here: "+smallshot.child("username").val()+"  "+regusername);
             if (smallshot.child("username").val()!=="" && smallshot.child("username").val()===regusername) {
                 usernameError = "Username Already Exists.";
             }
         });
     }).then(function() {
         if (usernameError.length>0) {
-            $('#regusername').attr('title', usernameError)
-                            .tooltip('fixTitle')
-                            .tooltip('setContent')
+            $("#regusername").attr("title", usernameError)
+                            .tooltip("fixTitle")
+                            .tooltip("setContent")
                             .tooltip({trigger: "focus"})
-                            .tooltip('show');
-            $('#regusername').css('background-color', 'rgb(247, 215, 216)');
+                            .tooltip("show");
+            $("#regusername").css("background-color", "rgb(247, 215, 216)");
         }
         else {
-            $('#regusername').tooltip('hide');
-            $('#regusername').removeAttr("title");
-            $('#regusername').css('background-color', 'white');
+            $("#regusername").tooltip("hide");
+            $("#regusername").removeAttr("title");
+            $("#regusername").css("background-color", "white");
         }
-        console.log(usernameError);
+//        console.log(usernameError);
     });
 }
 
-$("#email").on('input', emailValid);
+$("#email").on("input", emailValid);
 
 function emailValid() {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var emailAddress = document.getElementById('email').value;
-    emailError = re.test(emailAddress)? "" : "Email address is not valid.";
+    var re = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    var emailAddress = document.getElementById("email").value;
+//    emailError = re.test(emailAddress)? "" : "Email address is not valid.";
     emailError = emailAddress===""? "Email cannot be empty!" : "";
+    emailError = emailAddress.search(re)!==-1? emailError : "Email address is not valid.";
     var userdata = new Firebase(url);
     userdata.once("value", function(snapshot) {
         snapshot.forEach(function(smallshot) {
-            console.log("here: "+smallshot.child("email").val()+"  "+emailAddress);
+//            console.log("here: "+smallshot.child("email").val()+"  "+emailAddress);
             if (smallshot.child("email").val()!=="" && smallshot.child("email").val()===emailAddress) {
                 emailError = "Email Already Exists.";
             }
         });
     }).then(function() {
         if (emailError.length>0) {
-            $('#email').attr('title', emailError)
-                            .tooltip('fixTitle')
-                            .tooltip('setContent')
+            $("#email").attr("title", emailError)
+                            .tooltip("fixTitle")
+                            .tooltip("setContent")
                             .tooltip({trigger: "focus"})
-                            .tooltip('show');
-            $('#email').css('background-color', 'rgb(247, 215, 216)');
+                            .tooltip("show");
+            $("#email").css("background-color", "rgb(247, 215, 216)");
         }
         else {
-            $('#email').tooltip('hide');
-            $('#email').removeAttr("title");
-            $('#email').css('background-color', 'white');
+            $("#email").tooltip("hide");
+            $("#email").removeAttr("title");
+            $("#email").css("background-color", "white");
         }
-        console.log(emailError);
+//        console.log(emailError);
     });
 }
 
-$("#firstPassword").on('input', firstPasswordValid);
+$("#firstPassword").on("input", firstPasswordValid);
 
 function firstPasswordValid() {
     var firstPassword = firstPasswordInput.value;
@@ -626,24 +628,24 @@ function firstPasswordValid() {
     }());
     
     var firstInputIssues = firstInputIssuesTracker.retrieve();
-    console.log(firstInputIssues);
+//    console.log(firstInputIssues);
     //firstPasswordInput.setCustomValidity(firstInputIssues);
     if (firstInputIssues.length>0) {
-        $('#firstPassword').attr('title', firstInputIssues)
-                        .tooltip('fixTitle')
-                        .tooltip('setContent')
+        $("#firstPassword").attr("title", firstInputIssues)
+                        .tooltip("fixTitle")
+                        .tooltip("setContent")
                         .tooltip({trigger: "focus"})
-                        .tooltip('show');
-        $('#firstPassword').css('background-color', 'rgb(247, 215, 216)');
+                        .tooltip("show");
+        $("#firstPassword").css("background-color", "rgb(247, 215, 216)");
     }
     else {
-        $('#firstPassword').tooltip('hide');
-        $('#firstPassword').removeAttr("title");
-        $('#firstPassword').css('background-color', 'white');
+        $("#firstPassword").tooltip("hide");
+        $("#firstPassword").removeAttr("title");
+        $("#firstPassword").css("background-color", "white");
     }
 }
 
-$("#secondPassword").on('input', secondPasswordValid);
+$("#secondPassword").on("input", secondPasswordValid);
 
 function secondPasswordValid() {
     var secondPassword = secondPasswordInput.value;
@@ -654,55 +656,55 @@ function secondPasswordValid() {
     }
     
     var secondInputIssues = secondInputIssuesTracker.retrieve() || "";
-    console.log("["+secondInputIssues+"]");
+//    console.log("["+secondInputIssues+"]");
     if (secondInputIssues.length>0) {
-        console.log("still...");
-        $('#secondPassword').attr('title', secondInputIssues)
-                        .tooltip('fixTitle')
-                        .tooltip('setContent')
+//        console.log("still...");
+        $("#secondPassword").attr("title", secondInputIssues)
+                        .tooltip("fixTitle")
+                        .tooltip("setContent")
                         .tooltip({trigger: "focus"})
-                        .tooltip('show');
-        $('#secondPassword').css('background-color', 'rgb(247, 215, 216)');
+                        .tooltip("show");
+        $("#secondPassword").css("background-color", "rgb(247, 215, 216)");
     }
     else {
-        $('#secondPassword').tooltip('hide');
-        $('#secondPassword').removeAttr("title");
-        $('#secondPassword').css('background-color', 'white');
+        $("#secondPassword").tooltip("hide");
+        $("#secondPassword").removeAttr("title");
+        $("#secondPassword").css("background-color", "white");
     }
 }
 
 submitReg.onclick = function() {
-    console.log('clicked sign up');
+//    console.log("clicked sign up");
     submitReg.setCustomValidity("");
     usernameValid();
     firstPasswordValid();
     secondPasswordValid();
     if (secondInputIssuesTracker.issues.length+firstInputIssuesTracker.issues.length===0 && usernameError==="" && emailError==="") {
-        console.log('OK for now');
+//        console.log("OK for now");
         ref.createUser({
-            email    : document.querySelector('#email').value,
+            email    : document.querySelector("#email").value,
             password : secondPasswordInput.value
         }, function(error, userData) {
             if (error) {
-                console.log(error);
+//                console.log(error);
             } 
             else {
-                console.log("Successfully created user account with uid:", userData.uid);
+//                console.log("Successfully created user account with uid:", userData.uid);
                 new Firebase(url).child(userData.uid).set({
                     username: regUsernameInput.value,
-                    email: document.getElementById('email').value,
-                    job: document.getElementById('job').value || "unfilled",
+                    email: document.getElementById("email").value,
+                    job: document.getElementById("job").value || "unfilled",
                     events: []
                 });
                 ref.authWithPassword({
-                    email    : document.getElementById('email').value,
+                    email    : document.getElementById("email").value,
                     password : secondPasswordInput.value
                 }, function(error, authData) {
                     if (error) {
-                        console.log(error);
+//                        console.log(error);
                     }
                     else {
-                        console.log("Authenticated successfully with payload:", authData.uid);
+//                        console.log("Authenticated successfully with payload:", authData.uid);
                         authusername = regUsernameInput.value;
                         showComponents();
                     }
@@ -711,7 +713,7 @@ submitReg.onclick = function() {
         });
     }
     else {
-        console.log("eeeeeeeerror");
+//        console.log("eeeeeeeerror");
         submitReg.setCustomValidity("Please Validate Your Information.");
     }
 };
@@ -719,11 +721,11 @@ submitReg.onclick = function() {
 var loginuserError = "";
 var loginpassError = "";
 
-$('#username').on('input', loginuserValid);
+$("#username").on("input", loginuserValid);
 
 function loginuserValid() {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var loginusername = document.getElementById('username').value;
+    var loginusername = document.getElementById("username").value;
     loginuserError = loginusername===""? "Email cannot be empty!" : "";
     var userdata = new Firebase(url);
     userdata.once("value", function(snapshot) {
@@ -738,61 +740,61 @@ function loginuserValid() {
         }
     }).then(function() {
         if (loginuserError.length>0) {
-            $('#username').attr('title', loginuserError)
-                            .tooltip('fixTitle')
-                            .tooltip('setContent')
+            $("#username").attr("title", loginuserError)
+                            .tooltip("fixTitle")
+                            .tooltip("setContent")
                             .tooltip({trigger: "focus"})
-                            .tooltip('show');
-            $('#username').css('background-color', 'rgb(247, 215, 216)');
+                            .tooltip("show");
+            $("#username").css("background-color", "rgb(247, 215, 216)");
         }
         else {
-            $('#username').tooltip('hide');
-            $('#username').removeAttr("title");
-            $('#username').css('background-color', 'white');
+            $("#username").tooltip("hide");
+            $("#username").removeAttr("title");
+            $("#username").css("background-color", "white");
         }
-        console.log(loginuserError);
+//        console.log(loginuserError);
     });
 }
 
-$('#password').on('input', loginpassValid);
+$("#password").on("input", loginpassValid);
 
 function loginpassValid(errortext) {
-    var loginpassword = document.getElementById('password').value;
+    var loginpassword = document.getElementById("password").value;
     loginpassError = loginpassword==="" ? "Please enter your password." : errortext;
     if (loginpassError.length>0) {
-        $('#password').attr('title', loginpassError)
-                        .tooltip('fixTitle')
-                        .tooltip('setContent')
+        $("#password").attr("title", loginpassError)
+                        .tooltip("fixTitle")
+                        .tooltip("setContent")
                         .tooltip({trigger: "focus"})
-                        .tooltip('show');
-        $('#password').css('background-color', 'rgb(247, 215, 216)');
+                        .tooltip("show");
+        $("#password").css("background-color", "rgb(247, 215, 216)");
     }
     else {
-        $('#password').tooltip('hide');
-        $('#password').removeAttr("title");
-        $('#password').css('background-color', 'white');
+        $("#password").tooltip("hide");
+        $("#password").removeAttr("title");
+        $("#password").css("background-color", "white");
     }
 }
 
 // Login Validation
 submitLogin.onclick = function() {
-    console.log('login validation');
+//    console.log("login validation");
     loginuserValid("");
     loginpassValid("");
     if (loginuserError.length===0 && loginpassError.length===0) {
         ref.authWithPassword({
-            email    : document.querySelector('#username').value,
-            password : document.querySelector('#password').value
+            email    : document.querySelector("#username").value,
+            password : document.querySelector("#password").value
         }, function(error, authData) {
             if (error) {
-                console.log(error);
+//                console.log(error);
                 loginpassValid("Password is not correct.");
             }
             else {
-                console.log("Authenticated successfully with payload:", authData.uid);
-                //alert("Welcome "+document.querySelector('#username').value+"!");
+//                console.log("Authenticated successfully with payload:", authData.uid);
+                //alert("Welcome "+document.querySelector("#username").value+"!");
                 userid = authData.uid;
-                new Firebase(url+authData.uid+"/username").once('value', function(snapshot) {
+                new Firebase(url+authData.uid+"/username").once("value", function(snapshot) {
                     authusername = snapshot.val();
                     console.log(authusername);
                 }).then(function(){
@@ -804,15 +806,15 @@ submitLogin.onclick = function() {
 };
 
 function showComponents() {
-    console.log(authusername);
-    document.querySelector('.welcome').style.display = "none";
-    document.querySelector('.showEvents').style.display = "block";
-    document.getElementById('authusername').innerHTML = authusername;
-    $('.welcome input').tooltip('destroy');
+//    console.log(authusername);
+    document.querySelector(".welcome").style.display = "none";
+    document.querySelector(".showEvents").style.display = "block";
+    document.getElementById("authusername").innerHTML = authusername;
+    $(".welcome input").tooltip("destroy");
     showEvents();
 }
 
-$('.welcome input').tooltip({ selector: "[title]",
+$(".welcome input").tooltip({ selector: "[title]",
                       placement: "bottom",
                       trigger: "focus",
                       animation: false}); 

@@ -16,8 +16,8 @@
         margin-left: 5%;
     }
     .planner {
-        width: 90%;
-        margin-left: 5%;
+        width: 94%;
+        margin-left: 3%;
     }
 
 }
@@ -31,14 +31,18 @@
         clear: both;
     }
     .welcome {
-        width: 80%;
-        margin-left: 10%;
+        width: 90%;
+        margin-left: 5%;
     }
     .planner form {
     padding-left: 5px; }
 }
 
 @media only screen and (max-width: 500px) {
+    .welcome form .forminput {
+        width: 90%;
+        margin-left: 5%;
+    }
     .planner {
         width: 98%;
         margin-left: 1%;

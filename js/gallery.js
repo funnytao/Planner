@@ -2,85 +2,86 @@
 // Function to build an event infowindow
 
 function createPanel(options, key) {
-    var panel = document.createElement('div');
-    panel.setAttribute('class', 'panel panel-default');
-    var panelBody = document.createElement('div');
-    panelBody.setAttribute('class', 'panel-body');
-    var header = document.createElement('h2');
+    var panel = document.createElement("div");
+    panel.setAttribute("class", "panel panel-default");
+    var panelBody = document.createElement("div");
+    panelBody.setAttribute("class", "panel-body");
+    var header = document.createElement("h2");
     header.appendChild(document.createTextNode(options.eventname));
     panelBody.appendChild(header);
-    var closetab = document.createElement('a');
-    closetab.setAttribute('class', 'deleteEvent');
-    closetab.setAttribute('name', key);
-    closetab.setAttribute('onclick', 'deleteEvent(this.name)');
+    var closetab = document.createElement("a");
+    closetab.setAttribute("class", "deleteEvent");
+    closetab.setAttribute("name", key);
+    closetab.setAttribute("onclick", "deleteEvent(this.name)");
     if (options.important) {
-        var importantIcon = document.createElement('span');
-        importantIcon.setAttribute('class', 'glyphicon glyphicon-star');
+        var importantIcon = document.createElement("span");
+        importantIcon.setAttribute("class", "glyphicon glyphicon-star");
         closetab.appendChild(importantIcon);
     }
-    var closeIcon = document.createElement('span');
-    closeIcon.setAttribute('class', 'glyphicon glyphicon-trash');
+    var closeIcon = document.createElement("span");
+    closeIcon.setAttribute("class", "glyphicon glyphicon-trash");
     closetab.appendChild(closeIcon);
     panelBody.appendChild(closetab);
-    var cleardiv = document.createElement('div');
+    var cleardiv = document.createElement("div");
     panelBody.appendChild(cleardiv);
-    var panelFooter = document.createElement('div');
-    panelFooter.setAttribute('class', 'panel-footer');
+    var panelFooter = document.createElement("div");
+    panelFooter.setAttribute("class", "panel-footer");
     
-    var rowTime = document.createElement('div');
-    rowTime.setAttribute('class', 'row');
-    var startdiv = document.createElement('p');
-    startdiv.setAttribute('class', 'tag');
-    startdiv.appendChild(document.createTextNode('From'));
+    var rowTime = document.createElement("div");
+    rowTime.setAttribute("class", "row");
+    var startdiv = document.createElement("p");
+    startdiv.setAttribute("class", "tag");
+    startdiv.appendChild(document.createTextNode("From"));
     rowTime.appendChild(startdiv);
-    var startdata = document.createElement('p');
-    startdata.setAttribute('class', 'data');
+    var startdata = document.createElement("p");
+    startdata.setAttribute("class", "data");
     startdata.appendChild(document.createTextNode(options.start));
     rowTime.appendChild(startdata);
-    var enddiv = document.createElement('p');
-    enddiv.setAttribute('class', 'tag todiv');
-    enddiv.appendChild(document.createTextNode('To'));
+    var enddiv = document.createElement("p");
+    enddiv.setAttribute("class", "tag todiv");
+    enddiv.appendChild(document.createTextNode("To"));
     rowTime.appendChild(enddiv);
-    var enddata = document.createElement('p');
-    enddata.setAttribute('class', 'data');
+    var enddata = document.createElement("p");
+    enddata.setAttribute("class", "data");
     enddata.appendChild(document.createTextNode(options.end));
     rowTime.appendChild(enddata);
     
-    var rowHost = document.createElement('div');
-    rowHost.setAttribute('class', 'row');
-    var hostdiv = document.createElement('p');
-    hostdiv.setAttribute('class', 'tag');
-    hostdiv.appendChild(document.createTextNode('Host'));
+    var rowHost = document.createElement("div");
+    rowHost.setAttribute("class", "row");
+    var hostdiv = document.createElement("p");
+    hostdiv.setAttribute("class", "tag");
+    hostdiv.appendChild(document.createTextNode("Host"));
     rowHost.appendChild(hostdiv);
-    var hostdata = document.createElement('p');
-    hostdata.setAttribute('class', 'data');
+    var hostdata = document.createElement("p");
+    hostdata.setAttribute("class", "data");
     hostdata.appendChild(document.createTextNode(options.host));
     rowHost.appendChild(hostdata);
     
-    var rowGuest = document.createElement('div');
-    rowGuest.setAttribute('class', 'row');
-    var guesttitle = document.createElement('p');
-    guesttitle.setAttribute('class', 'tag');
-    guesttitle.appendChild(document.createTextNode('Guests'));
+    var rowGuest = document.createElement("div");
+    rowGuest.setAttribute("class", "row");
+    var guesttitle = document.createElement("p");
+    guesttitle.setAttribute("class", "tag");
+    guesttitle.appendChild(document.createTextNode("Guests"));
     rowGuest.appendChild(guesttitle);
     var guestnames = "";
     options.guests.forEach(function(item) {
         guestnames = guestnames + item + ", ";
     });
-    var guestdata = document.createElement('p');
-    guestdata.setAttribute('class', 'data');
+    var guestdata = document.createElement("p");
+    guestdata.setAttribute("class", "data");
     guestdata.appendChild(document.createTextNode(guestnames.substring(0, guestnames.length-3)));
     rowGuest.appendChild(guestdata);
     
+    var rowNote;
     if (options.note.length>0) {
-        var rowNote = document.createElement('div');
-        rowNote.setAttribute('class', 'row');
-        var notediv = document.createElement('p');
-        notediv.setAttribute('class', 'tag');
-        notediv.appendChild(document.createTextNode('Note'));
+        rowNote = document.createElement("div");
+        rowNote.setAttribute("class", "row");
+        var notediv = document.createElement("p");
+        notediv.setAttribute("class", "tag");
+        notediv.appendChild(document.createTextNode("Note"));
         rowNote.appendChild(notediv);
-        var notedata = document.createElement('p');
-        notedata.setAttribute('class', 'data');
+        var notedata = document.createElement("p");
+        notedata.setAttribute("class", "data");
         notedata.appendChild(document.createTextNode(options.note));
         rowNote.appendChild(notedata);
     }
@@ -91,20 +92,20 @@ function createPanel(options, key) {
         panelFooter.appendChild(rowNote); 
     }
     panelFooter.appendChild(rowTime);
-    var newmap = document.createElement('div');
-    newmap.setAttribute('id', key);
-    newmap.setAttribute('class', 'map');
+    var newmap = document.createElement("div");
+    newmap.setAttribute("id", key);
+    newmap.setAttribute("class", "map");
     panelFooter.appendChild(newmap);
     panel.appendChild(panelBody);
     panel.appendChild(panelFooter);
-    document.getElementById('events').appendChild(panel);
+    document.getElementById("events").appendChild(panel);
     displayMap(key, options.address);
 }
 
 // Delete event
 
 function deleteEvent(item) {
-    console.log(item);
+//    console.log(item);
     var ref = new Firebase("https://boiling-heat-4273.firebaseio.com");
     var authData = ref.getAuth();
     if (authData) {
@@ -116,14 +117,14 @@ function deleteEvent(item) {
 // Display all the event
 
 function showEvents() {
-    var events = document.getElementById('events');
+    var events = document.getElementById("events");
     events.innerHTML = "";
     var ref = new Firebase("https://boiling-heat-4273.firebaseio.com");
     var authData = ref.getAuth();
     if (authData) {
         var dataref = new Firebase("https://boiling-heat-4273.firebaseio.com/web/planner/users/"+authData.uid+"/events");
 //        dataref.once("value", function(snapshot) {
-        dataref.orderByChild('start').on("value", function(snapshot) {
+        dataref.orderByChild("start").on("value", function(snapshot) {
             snapshot.forEach(function(childSnapshot) {
                 createPanel(childSnapshot.val(), childSnapshot.key());
             });
@@ -144,7 +145,7 @@ function displayMap(key, address) {
     });
     var geocoder = new google.maps.Geocoder();
 
-    geocoder.geocode({'address': address}, function(results, status) {
+    geocoder.geocode({"address": address}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
@@ -152,11 +153,11 @@ function displayMap(key, address) {
                 position: results[0].geometry.location
             });
             var infowindow = new google.maps.InfoWindow({ maxWidth: 140 });
-            infowindow.setContent('<div><strong>' + address.split(',')[0] + '</strong><br>' + address);
+            infowindow.setContent("<div><strong>" + address.split(",")[0] + "</strong><br>" + address);
             infowindow.open(map, marker);
         } 
         else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            alert("Geocode was not successful for the following reason: " + status);
         }
     });
 }

@@ -234,9 +234,16 @@ body {
     padding: 10px;
     padding-bottom: 0;
     display: inline-block; }
+    .welcome form .forminput {
+      width: 80%;
+      margin-left: 10%; }
     .welcome form input {
+      float: left;
+      margin-left: 0;
       height: 30px;
-      width: 220px; }
+      width: 64%;
+      margin-right: 1%;
+      border-radius: 0 4px 4px 0; }
     .welcome form div {
       margin-bottom: 5px; }
     .welcome form button {
@@ -262,3 +269,16 @@ body {
     display: none; }
   .welcome a {
     text-decoration: none; }
+  .welcome .inputprefix {
+    margin-left: 1%;
+    margin-right: 0;
+    color: white;
+    font-weight: 500;
+    padding-top: 4px;
+    height: 30px;
+    width: 34%;
+    text-align: center;
+    vertical-align: middle;
+    float: left;
+    border-radius: 4px 0 0 4px;
+    background-color: #ff3e3e; }

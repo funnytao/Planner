@@ -18,18 +18,18 @@
             <div class="welcome">
                 <form id="login-form" onsubmit="return false" novalidate>
                     <div class="row"><h1>Login</h1></div>
-                    <div class="row" data-tip="This is the text of the tooltip2"><input title="" id="username" type="email" placeholder="Email" required autofocus autocomplete="on"></div> 
-                    <div class="row"><input title="" id="password" type="password" placeholder="Password" required autocomplete="on"></div> 
+                    <div class="row forminput" data-tip="This is the text of the tooltip2"><label for="username" class='inputprefix'>Email</label><input title="" id="username" type="email" placeholder="example@address.com" required autofocus autocomplete="on"></div> 
+                    <div class="row forminput"><label for="password" class='inputprefix'>Password</label><input title="" id="password" type="password" required autocomplete="on"></div> 
                     <div class="row"><button id="login-button" type="submit" >Sign in</button></div> 
                     <div class="row redirect"><a href="#" id="toreg"><p>New Member? Register now!</p></a></div> 
                 </form>
                 <form id="register-form" onsubmit="return false" novalidate>
                     <div class="row"><h1>Register</h1></div>
-                    <div class="row"><input title="" id="regusername" type="text" placeholder="Username" required autofocus autocomplete="on"></div> 
-                    <div class="row"><input title="" id="email" type="email" placeholder="Email" required autocomplete="on"></div> 
-                    <div class="row"><input id="job" type="text" placeholder="Job (optional)" autocomplete="on"></div> 
-                    <div class="row"><input title="" id="firstPassword" type="password" placeholder="Password" required autocomplete="on"></div> 
-                    <div class="row"><input title="" id="secondPassword" type="password" placeholder="Re-Enter Password" required autocomplete="on"></div> 
+                    <div class="row forminput"><label for="regusername" class='inputprefix'>Username</label><input title="" id="regusername" type="text" required autofocus autocomplete="on"></div> 
+                    <div class="row forminput"><label for="email" class='inputprefix'>Email</label><input title="" id="email" type="email" placeholder="example@address.com" required autocomplete="on"></div> 
+                    <div class="row forminput"><label for="job" class='inputprefix'>Job</label><input id="job" type="text" placeholder="Web Developer (optional)" autocomplete="on"></div> 
+                    <div class="row forminput"><label for="firstPassword" class='inputprefix'>Password</label><input title="" id="firstPassword" type="password" required autocomplete="on"></div> 
+                    <div class="row forminput"><label for="secondPassword" class='inputprefix'>Password</label><input title="" id="secondPassword" type="password" placeholder="Re-enter Password" required autocomplete="on"></div> 
                     <div class="row"><button title="" id="register-button" type="submit">Sign up</button></div>
                     <div class="row  redirect"><a href="#" id="tologin"><p>Already Have An Account? Login Now!</p></a></div> 
                 </form>
